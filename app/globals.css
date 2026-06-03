@@ -175,7 +175,7 @@
         @apply flex flex-col gap-3;
 
         .poster {
-            @apply h-75 w-full rounded-lg object-cover;
+            @apply h-75 w-full rounded-lg overflow-hidden;
         }
 
         .title {
@@ -190,7 +190,7 @@
             @apply text-light-200 flex flex-row flex-wrap items-center gap-4;
 
             div {
-                @apply flex flex-row gap-2;
+                @apply flex flex-row gap-2 items-center;
             }
         }
     }
