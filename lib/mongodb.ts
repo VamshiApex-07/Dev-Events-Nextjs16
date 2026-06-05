@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 // MongoDB connection URI from environment variables 
-const MONGODB_URI = process.env.MONGO_URI!;
+// MongoDB connection URI from environment variables 
+const MONGODB_URI = process.env.MONGO_URI;
+if (!MONGODB_URI) {
+  throw new Error('MONGO_URI environment variable is required');
+}
 
 // Define the shape of our cache object using Mongoose's own types
 interface MongooseCache {
