@@ -1,5 +1,5 @@
 import mongoose, { Model, Schema, Types } from 'mongoose'
-import { Event, type IEvent } from './event.model'
+import { Event } from './event.model'
 
 export interface IBooking {
   eventId: Types.ObjectId

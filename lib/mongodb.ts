@@ -34,7 +34,7 @@ async function dbConnect(): Promise<typeof mongoose> {
 
   // Start a new connection if one isn't already in progress
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI).catch((err) => {
+    cached.promise = mongoose.connect(MONGODB_URI!).catch((err) => {
       cached.promise = null;
       throw err;
     });
