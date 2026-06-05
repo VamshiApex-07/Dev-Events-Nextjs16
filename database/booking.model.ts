@@ -1,5 +1,5 @@
 import mongoose, { Model, Schema, Types } from 'mongoose'
-import type { IEvent } from './event.model'
+import { Event, type IEvent } from './event.model'
 
 export interface IBooking {
   eventId: Types.ObjectId
@@ -40,7 +40,6 @@ bookingSchema.pre('save', async function () {
   // Only validate eventId if it's new or modified
   if (this.isNew || this.isModified('eventId')) {
     try {
-      const Event = mongoose.model<IEvent>('Event')
       const eventExists = await Event.findById(this.eventId).select('_id')
 
       if (!eventExists) {
