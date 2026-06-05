@@ -1,7 +1,12 @@
-import { PostHog } from 'posthog-js'
+import type { PostHog } from 'posthog-js'
+
+declare global {
+  interface Window {
+    posthog: PostHog | undefined
+  }
+}
 
 export function getPostHog(): PostHog | null {
   if (typeof window === 'undefined') return null
-  const ph = (window as any).posthog
-  return ph || null
+  return window.posthog ?? null
 }
