@@ -10,34 +10,25 @@ interface Props {
     time: string;
 }
 
-
 const EventCard = ({ title, image, slug, location, date, time }: Props) => {
     return (
         <Link href={`/events/${slug}`} id="event-card">
-            <div className="poster relative">
-                <Image src={image} alt={title} fill sizes="410px" className="rounded-lg object-cover" />
-            </div>
+            <Image src={image} alt={title} width={410} height={300} className="poster" />
 
-            <div className="flex flex-row gap-2 items-center">
-                <span className="relative inline-block size-[14px] shrink-0">
-                    <Image src="/icons/pin.svg" alt="location" fill sizes="14px" />
-                </span>
+            <div className="flex flex-row gap-2">
+                <Image src="/icons/pin.svg" alt="location" width={14} height={14} className="h-4 w-auto"/>
                 <p>{location}</p>
             </div>
 
             <p className="title">{title}</p>
 
             <div className="datetime">
-                <div className="items-center">
-                    <span className="relative inline-block size-[14px] shrink-0">
-                        <Image src="/icons/calendar.svg" alt="date" fill sizes="14px" />
-                    </span>
+                <div>
+                    <Image src="/icons/calendar.svg" alt="date" width={14} height={14} />
                     <p>{date}</p>
                 </div>
-                <div className="items-center">
-                    <span className="relative inline-block size-[14px] shrink-0">
-                        <Image src="/icons/clock.svg" alt="time" fill sizes="14px" />
-                    </span>
+                <div>
+                    <Image src="/icons/clock.svg" alt="time" width={14} height={14} />
                     <p>{time}</p>
                 </div>
             </div>
