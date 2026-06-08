@@ -6,7 +6,14 @@ import { useEffect, Suspense } from 'react'
 import { getPostHog } from '@/lib/posthog'
 
 const PH_API_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY
-const PH_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com'
+
+function getApiHost(): string {
+  // Use relative path so rewrites proxy requests through our domain,
+  // bypassing ad blockers that block direct PostHog calls.
+  if (typeof window !== "undefined") return "/ingest"
+  // On the server, use the full URL so SSR renders correctly.
+  return process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com"
+}
 
 function PageViewTracker() {
   const pathname = usePathname()
@@ -31,7 +38,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <PHProvider apiKey={PH_API_KEY} options={{ api_host: PH_HOST }}>
+    <PHProvider apiKey={PH_API_KEY} options={{ api_host: getApiHost() }}>
       <Suspense fallback={null}>
         <PageViewTracker />
       </Suspense>

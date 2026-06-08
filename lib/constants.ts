@@ -10,8 +10,8 @@ export type Event = {
 export const events: Event[] = [
   {
     image: '/images/event1.png',
-    title: 'ReactConf 2026',
-    slug: 'reactconf-2026',
+    title: 'Cloud Next 2026',
+    slug: 'cloud-next-2026',
     location: 'San Francisco, CA',
     date: 'May 15, 2026',
     time: '9:00 AM',

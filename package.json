@@ -9,19 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "lucide-react": "^1.17.0",
+    "cloudinary": "^2.10.0",
     "mongoose": "^9.6.3",
     "next": "16.2.6",
     "ogl": "^1.0.11",
     "posthog-js": "^1.379.1",
-    "posthog-node": "^5.35.13",
-    "radix-ui": "^1.4.3",
     "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "shadcn": "^4.10.0",
-    "tailwind-merge": "^3.6.0"
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
