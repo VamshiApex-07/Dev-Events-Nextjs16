@@ -27,9 +27,17 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: 'Image is too large' }, { status: 413 });
         }
 
-        const tags = JSON.parse(formData.get('tags') as string);
-        const agenda = JSON.parse(formData.get('agenda') as string);
-
+        let tags;
+        let agenda;
+        try {
+            tags = JSON.parse(formData.get('tags') as string);
+            agenda = JSON.parse(formData.get('agenda') as string);
+        } catch {
+            return NextResponse.json(
+                { message: 'Invalid tags/agenda JSON format' },
+                { status: 400 }
+            );
+        }
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
         const uploadResult = await new Promise((resolve, reject) => {
