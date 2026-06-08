@@ -18,16 +18,20 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: 'Invalid JSON data format',error: e instanceof Error ? e.message : 'Unknown'}, { status: 400 })
         }
 
-        const file = formData.get('image') as File;
-
-        if(!file) return NextResponse.json({ message: 'Image file is required'}, { status: 400 })
+        const file = formData.get('image');
+        if (!(file instanceof File)) {
+            return NextResponse.json({ message: 'Image file is required' }, { status: 400 });
+        }
+        const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
+        if (file.size > MAX_IMAGE_SIZE) {
+            return NextResponse.json({ message: 'Image is too large' }, { status: 413 });
+        }
 
         const tags = JSON.parse(formData.get('tags') as string);
         const agenda = JSON.parse(formData.get('agenda') as string);
 
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
-
         const uploadResult = await new Promise((resolve, reject) => {
             cloudinary.uploader.upload_stream({ resource_type: 'image', folder: 'DevEvent' }, (error, results) => {
                 if(error) return reject(error);
